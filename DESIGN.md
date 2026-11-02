@@ -25,11 +25,21 @@ when the theme toggles.
 | `--background` | `bg-background` | `#ffffff` | `#000000` | Page background |
 | `--foreground` | `text-foreground` | `#18181b` | `#fafafa` | Primary text, headings |
 | `--muted-foreground` | `text-muted-foreground` | `#52525b` | `#a1a1aa` | Secondary text (summaries, subheadings) |
-| `--faint-foreground` | `text-faint-foreground` | `#71717a` | `#71717a` | Tertiary meta text ("coming soon" label, inactive nav) |
+| `--faint-foreground` | `text-faint-foreground` | `#71717a` | `#86868f` | Tertiary meta text ("coming soon" label, inactive nav) |
 | `--border` | `border-border` | `#e4e4e7` | `#27272a` | Card borders |
 | `--card` | `bg-card` | `#fafafa` | `rgb(24 24 27 / .4)` | Card background |
 | `--chip` | `bg-chip` | `#f4f4f5` | `rgb(39 39 42 / .8)` | Stack badges, neutral status pill |
 | `--chip-foreground` | `text-chip-foreground` | `#3f3f46` | `#d4d4d8` | Stack badge text |
+
+`--faint-foreground` is the one token where light and dark aren't the
+same hex: `#71717a` (zinc-500) measures 4.83:1 on the light background
+but only 4.35:1 against pure black — an Impeccable `critique` caught
+this failing AA in dark mode. The dark value is a custom shade between
+zinc-500 and zinc-400, picked to clear 4.5:1 with a small margin
+without jumping all the way to `muted-foreground`'s brightness (which
+would erase the two-tier distinction between them). If you add another
+token here, verify its dark-mode contrast explicitly — don't assume
+one hex works for both themes just because it happened to elsewhere.
 
 Status accent colors (amber = in progress, emerald = live) stay as
 direct Tailwind utilities with explicit `dark:` variants, since they
@@ -59,6 +69,13 @@ Geist Sans (`--font-sans`) for UI text, Geist Mono (`--font-mono`)
 reserved for anything code-like (not yet used). Loaded via
 `next/font/google` in the root layout, applied with the `font-sans`
 utility on `<body>`.
+
+Every wrapped paragraph uses Tailwind's `text-pretty` (CSS
+`text-wrap: pretty`) so the browser avoids leaving a short orphaned
+word alone on the last line — an Impeccable `critique` flagged exactly
+that on three card descriptions. Apply it to any new multi-line
+paragraph-role text by default; it's a no-risk progressive enhancement
+(unsupported browsers just keep normal wrapping).
 
 ## Motion
 
@@ -135,6 +152,24 @@ isn't rendered here, even though it's still tracked in
 `ProjectStatus` (`planned` / `in-progress` / `live`). Neutral
 (`chip`/`muted-foreground`) for planned; accent color only for states
 that need attention (in progress, live).
+
+The accent text is `amber-800`/`emerald-800` (light) and
+`amber-400`/`emerald-400` (dark) — not the more obvious `-600` step.
+An Impeccable `critique` measured the `-600` pairing at 2.8:1 against
+its `/10`-opacity pill background (needs 4.5:1 for body-size text);
+`-700` still fell just short at 4.46:1 once actually rendered, `-800`
+clears it. **Don't trust a hand-picked shade step for small colored
+text on a tinted background — verify the real rendered contrast.**
+
+### Stack chips: cap at 4
+
+A card shows at most 4 stack chips; beyond that, a `+N` chip replaces
+the rest (full list in its `title` tooltip). Fixes a cognitive-load
+finding (>4 items in one visual group) on cards with 5-6 technologies.
+The `+N` chip reuses `text-chip-foreground`, not `text-faint-foreground`
+— the fainter token measured 4.4:1 on the chip background here, just
+under AA; same lesson as the status badge, a token that's fine in one
+context isn't guaranteed fine on every background.
 
 ### Card border (visual weight by status)
 
