@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { locales, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { siteUrl } from "@/lib/site";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -18,10 +20,42 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-export const metadata: Metadata = {
-  title: "Cristhian Armas — Portafolio",
-  description: "Hub de proyectos de portafolio",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = getDictionary(locale);
+  const title = `Cristhian Armas — ${dict.heroRole}`;
+  const url = `${siteUrl}/${locale}`;
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title,
+    description: dict.heroTagline,
+    alternates: {
+      canonical: url,
+      languages: Object.fromEntries(
+        locales.map((l) => [l, `${siteUrl}/${l}`]),
+      ),
+    },
+    openGraph: {
+      title,
+      description: dict.heroTagline,
+      url,
+      siteName: "Cristhian Armas",
+      locale: locale === "es" ? "es_ES" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: dict.heroTagline,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
