@@ -171,6 +171,28 @@ The `+N` chip reuses `text-chip-foreground`, not `text-faint-foreground`
 under AA; same lesson as the status badge, a token that's fine in one
 context isn't guaranteed fine on every background.
 
+### Stack summary (`StackSummary`)
+
+A separate, curated view of the technologies across every linked
+project — not a dump of each card's raw `stack` array. Lives in
+`src/content/stack.ts` as `StackGroup[]` (id, bilingual label, item
+list), rendered as a two-column grid of label + chip row, reusing the
+exact same `bg-chip`/`text-chip-foreground` chip used on project
+cards (cohesion over inventing a new tag style).
+
+Deliberately curated, not generated from `projects.ts`: it lists only
+nameable frameworks/languages/services (what a recruiter would search
+a CV for — Next.js, PostgreSQL, Docker), not implementation-detail
+items that stay on individual cards (Signals, Web Workers, Pinia, Vue
+Router, Bloc, Geolocation). Per-project technology names are also
+normalized here across projects that phrased the same thing slightly
+differently (e.g. "Angular 20" / "Angular" → "Angular"; "Tailwind CSS
+4" / "Tailwind CSS" → "Tailwind CSS"), and the three separate AWS/Azure
+services each project lists are consolidated to one "AWS" / "Azure"
+chip at this summary level. If `projects.ts` ever stops matching this
+curation (a new project adds a technology not reflected here), update
+`stack.ts` by hand — it is not auto-derived.
+
 ### Card border (visual weight by status)
 
 An Impeccable `critique` flagged that every card — one real,
@@ -214,8 +236,7 @@ in sync by construction.
 
 ## Open items
 
-Hero section, grouped stack summary, experience, and contact are not
-built yet — experience and contact are blocked on real biographical
-data (see `portafolio-plan/projects/00-hub.md`, "Progreso"). Mobile
-navigation, SEO/metadata, and deployment are later steps in the same
-plan.
+Experience and contact sections are not built yet — blocked on real
+biographical data (see `portafolio-plan/projects/00-hub.md`,
+"Progreso"). Mobile navigation, SEO/metadata, and deployment are later
+steps in the same plan.
