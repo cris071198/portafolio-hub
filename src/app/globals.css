@@ -11,7 +11,6 @@
   --card: #fafafa;
   --chip: #f4f4f5;
   --chip-foreground: #3f3f46;
-  --hover-border: #a1a1aa;
   --hover-bg: #f4f4f5;
 }
 
@@ -24,7 +23,6 @@
   --card: rgb(24 24 27 / 0.4);
   --chip: rgb(39 39 42 / 0.8);
   --chip-foreground: #d4d4d8;
-  --hover-border: #52525b;
   --hover-bg: rgb(39 39 42 / 0.7);
 }
 
@@ -65,14 +63,12 @@
 .project-card {
   transition:
     transform 200ms var(--ease-out-strong),
-    border-color 200ms var(--ease-out-strong),
     background-color 200ms var(--ease-out-strong);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover {
     transform: translateY(-4px);
-    border-color: var(--hover-border);
     background-color: var(--hover-bg);
   }
 }

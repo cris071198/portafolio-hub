@@ -7,6 +7,15 @@ const statusStyles: Record<ProjectStatus, string> = {
   live: "bg-emerald-500/10 text-emerald-600 ring-emerald-500/30 dark:text-emerald-400",
 };
 
+// Planned cards get a fainter, neutral border; in-progress/live cards get a
+// status-colored accent border. Text and backgrounds are left untouched so
+// this never risks contrast — the only lever is the border.
+const cardBorderStyles: Record<ProjectStatus, string> = {
+  planned: "border-border/50",
+  "in-progress": "border-amber-500/40",
+  live: "border-emerald-500/40",
+};
+
 export function ProjectCard({
   project,
   lang,
@@ -28,7 +37,7 @@ export function ProjectCard({
 
   return (
     <article
-      className="project-card animate-fade-in-up flex flex-col gap-4 rounded-xl border border-border bg-card p-6"
+      className={`project-card animate-fade-in-up flex flex-col gap-4 rounded-xl border ${cardBorderStyles[project.status]} bg-card p-6`}
       style={{ animationDelay: `${Math.min(index * 40, 280)}ms` }}
     >
       <div className="flex items-start justify-between gap-3">
