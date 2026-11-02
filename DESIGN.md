@@ -25,7 +25,7 @@ when the theme toggles.
 | `--background` | `bg-background` | `#ffffff` | `#000000` | Page background |
 | `--foreground` | `text-foreground` | `#18181b` | `#fafafa` | Primary text, headings |
 | `--muted-foreground` | `text-muted-foreground` | `#52525b` | `#a1a1aa` | Secondary text (summaries, subheadings) |
-| `--faint-foreground` | `text-faint-foreground` | `#71717a` | `#71717a` | Tertiary meta text (phase/size, inactive nav) |
+| `--faint-foreground` | `text-faint-foreground` | `#71717a` | `#71717a` | Tertiary meta text ("coming soon" label, inactive nav) |
 | `--border` | `border-border` | `#e4e4e7` | `#27272a` | Card borders |
 | `--card` | `bg-card` | `#fafafa` | `rgb(24 24 27 / .4)` | Card background |
 | `--chip` | `bg-chip` | `#f4f4f5` | `rgb(39 39 42 / .8)` | Stack badges, neutral status pill |
@@ -121,8 +121,13 @@ chaining `[@media(...)]:hover:` utilities.
 ### Card (`ProjectCard`)
 
 `rounded-xl border border-border bg-card p-6`, vertical flex layout:
-title + status badge → summary → stack chips → meta row (phase/size +
-code/demo links) pinned to the bottom with `mt-auto`.
+title + status badge → summary → stack chips → a footer pinned to the
+bottom with `mt-auto`: repo/demo links when they exist, or an honest
+"Próximamente"/"Coming soon" label when they don't — never blank
+space. No internal roadmap metadata (phase/size) is shown; it reads
+as unexplained jargon to the hub's actual audience (recruiters) and
+isn't rendered here, even though it's still tracked in
+`src/content/projects.ts` for planning purposes.
 
 ### Status badge
 
