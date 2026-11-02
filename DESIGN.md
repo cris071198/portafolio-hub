@@ -136,6 +136,21 @@ isn't rendered here, even though it's still tracked in
 (`chip`/`muted-foreground`) for planned; accent color only for states
 that need attention (in progress, live).
 
+### Card border (visual weight by status)
+
+An Impeccable `critique` flagged that every card — one real,
+inspectable project and nine placeholders — carried identical visual
+weight, so the one thing worth clicking didn't stand out. Fixed via
+border color only, keyed by `ProjectStatus`: `border-border/50`
+(fainter than the default) for `planned`, `border-amber-500/40` for
+`in-progress`, `border-emerald-500/40` for `live`. Deliberately not
+done with opacity or background dimming — that would have touched
+text contrast, which was already a flagged issue elsewhere. The
+`.project-card:hover` rule in `globals.css` no longer overrides
+border-color (it used to reset every card to the same neutral hover
+border, flattening this distinction); hover now only lifts
+(`translateY`) and shifts background.
+
 ### Stack chip
 
 `rounded-md bg-chip text-chip-foreground`, one per technology, no
