@@ -1,7 +1,6 @@
-import { locales, type Locale } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { LanguageSwitcher } from "@/components/language-switcher";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteNav } from "@/components/site-nav";
 import { HeroSection } from "@/components/hero-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { StackSummary } from "@/components/stack-summary";
@@ -12,17 +11,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <div className="flex flex-1 flex-col items-center">
-      <nav className="flex w-full max-w-5xl justify-end gap-4 px-6 py-8">
-        <LanguageSwitcher
-          locales={locales}
-          currentLang={lang as Locale}
-          navLabel={dict.languageSwitcherLabel}
-        />
-        <ThemeToggle
-          toLightLabel={dict.themeToggleToLight}
-          toDarkLabel={dict.themeToggleToDark}
-        />
-      </nav>
+      <SiteNav lang={lang as Locale} dict={dict} />
 
       <HeroSection dict={dict} />
 
