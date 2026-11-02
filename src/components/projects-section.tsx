@@ -25,7 +25,7 @@ export function ProjectsSection({
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           {dict.projectsHeading}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">
+        <p className="mt-2 text-pretty text-sm leading-6 text-muted-foreground">
           {dict.projectsSubheading}
         </p>
       </div>

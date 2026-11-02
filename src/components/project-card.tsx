@@ -3,8 +3,8 @@ import type { Project, ProjectStatus } from "@/content/types";
 
 const statusStyles: Record<ProjectStatus, string> = {
   planned: "bg-chip text-muted-foreground ring-border",
-  "in-progress": "bg-amber-500/10 text-amber-600 ring-amber-500/30 dark:text-amber-400",
-  live: "bg-emerald-500/10 text-emerald-600 ring-emerald-500/30 dark:text-emerald-400",
+  "in-progress": "bg-amber-500/10 text-amber-800 ring-amber-500/30 dark:text-amber-400",
+  live: "bg-emerald-500/10 text-emerald-800 ring-emerald-500/30 dark:text-emerald-400",
 };
 
 // Planned cards get a fainter, neutral border; in-progress/live cards get a
@@ -15,6 +15,8 @@ const cardBorderStyles: Record<ProjectStatus, string> = {
   "in-progress": "border-amber-500/40",
   live: "border-emerald-500/40",
 };
+
+const MAX_VISIBLE_STACK = 4;
 
 export function ProjectCard({
   project,
@@ -34,6 +36,8 @@ export function ProjectCard({
   index: number;
 }) {
   const hasLinks = Boolean(project.repoUrl || project.demoUrl);
+  const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK);
+  const hiddenStackCount = project.stack.length - visibleStack.length;
 
   return (
     <article
@@ -51,12 +55,12 @@ export function ProjectCard({
         </span>
       </div>
 
-      <p className="text-sm leading-6 text-muted-foreground">
+      <p className="text-pretty text-sm leading-6 text-muted-foreground">
         {project.summary[lang]}
       </p>
 
       <ul className="flex flex-wrap gap-2">
-        {project.stack.map((tech) => (
+        {visibleStack.map((tech) => (
           <li
             key={tech}
             className="rounded-md bg-chip px-2 py-1 text-xs text-chip-foreground"
@@ -64,6 +68,14 @@ export function ProjectCard({
             {tech}
           </li>
         ))}
+        {hiddenStackCount > 0 && (
+          <li
+            className="rounded-md bg-chip px-2 py-1 text-xs text-chip-foreground"
+            title={project.stack.slice(MAX_VISIBLE_STACK).join(", ")}
+          >
+            +{hiddenStackCount}
+          </li>
+        )}
       </ul>
 
       <div className="mt-auto flex items-center justify-end gap-3 pt-2 text-xs">

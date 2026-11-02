@@ -9,7 +9,7 @@ export function HeroSection({ dict }: { dict: Dictionary }) {
       <p className="text-lg font-medium text-muted-foreground">
         {dict.heroRole}
       </p>
-      <p className="max-w-xl text-sm leading-6 text-muted-foreground">
+      <p className="max-w-xl text-pretty text-sm leading-6 text-muted-foreground">
         {dict.heroTagline}
       </p>
       <a
