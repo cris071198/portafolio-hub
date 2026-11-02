@@ -2,8 +2,10 @@ import type { Locale } from "./config";
 
 const dictionaries = {
   es: {
-    greeting: "Portafolio en construcción",
-    switchToLabel: "English",
+    heroRole: "Ingeniero de software",
+    heroTagline:
+      "Un proyecto nuevo por cada tecnología de mi CV, resolviendo casos de comercio exterior, finanzas, logística y telecom.",
+    heroCta: "Ver proyectos",
     projectsHeading: "Proyectos",
     projectsSubheading:
       "Un proyecto nuevo por cada stack del CV. Cada uno resuelve un caso del dominio de comercio exterior, finanzas, contabilidad, logística o telecom.",
@@ -18,8 +20,10 @@ const dictionaries = {
     themeToggleToDark: "Cambiar a tema oscuro",
   },
   en: {
-    greeting: "Portfolio under construction",
-    switchToLabel: "Español",
+    heroRole: "Software Engineer",
+    heroTagline:
+      "A new project for every technology on my résumé, solving cases from trade, finance, logistics, and telecom.",
+    heroCta: "View projects",
     projectsHeading: "Projects",
     projectsSubheading:
       "A new project for every stack on the résumé. Each one solves a case from the trade, finance, accounting, logistics, or telecom domain.",
