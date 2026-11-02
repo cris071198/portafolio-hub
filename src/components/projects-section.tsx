@@ -38,10 +38,9 @@ export function ProjectsSection({
             lang={lang}
             index={index}
             statusLabel={dict[statusLabelKey[project.status]]}
-            phaseLabel={dict.phaseLabel}
-            sizeLabel={dict.sizeLabel}
             repoLabel={dict.repoLabel}
             demoLabel={dict.demoLabel}
+            comingSoonLabel={dict.comingSoonLabel}
           />
         ))}
       </div>

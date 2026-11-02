@@ -12,7 +12,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <div className="flex flex-1 flex-col items-center">
       <nav className="flex w-full max-w-5xl justify-end gap-4 px-6 py-8">
-        <LanguageSwitcher locales={locales} currentLang={lang as Locale} />
+        <LanguageSwitcher
+          locales={locales}
+          currentLang={lang as Locale}
+          navLabel={dict.languageSwitcherLabel}
+        />
         <ThemeToggle
           toLightLabel={dict.themeToggleToLight}
           toDarkLabel={dict.themeToggleToDark}

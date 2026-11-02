@@ -12,15 +12,17 @@ const labels: Record<Locale, string> = {
 export function LanguageSwitcher({
   locales,
   currentLang,
+  navLabel,
 }: {
   locales: readonly Locale[];
   currentLang: Locale;
+  navLabel: string;
 }) {
   const pathname = usePathname() ?? `/${currentLang}`;
   const rest = pathname.slice(`/${currentLang}`.length);
 
   return (
-    <nav aria-label="Selector de idioma" className="flex gap-3 text-sm">
+    <nav aria-label={navLabel} className="flex gap-3 text-sm">
       {locales.map((locale) => {
         const isCurrent = locale === currentLang;
         return (

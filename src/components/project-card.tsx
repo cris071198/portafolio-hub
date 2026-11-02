@@ -11,21 +11,21 @@ export function ProjectCard({
   project,
   lang,
   statusLabel,
-  phaseLabel,
-  sizeLabel,
   repoLabel,
   demoLabel,
+  comingSoonLabel,
   index,
 }: {
   project: Project;
   lang: Locale;
   statusLabel: string;
-  phaseLabel: string;
-  sizeLabel: string;
   repoLabel: string;
   demoLabel: string;
+  comingSoonLabel: string;
   index: number;
 }) {
+  const hasLinks = Boolean(project.repoUrl || project.demoUrl);
+
   return (
     <article
       className="project-card animate-fade-in-up flex flex-col gap-4 rounded-xl border border-border bg-card p-6"
@@ -57,32 +57,33 @@ export function ProjectCard({
         ))}
       </ul>
 
-      <div className="mt-auto flex items-center justify-between pt-2 text-xs text-faint-foreground">
-        <span>
-          {phaseLabel} {project.phase} · {sizeLabel} {project.size}
-        </span>
-        <span className="flex gap-3">
-          {project.repoUrl && (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
-            >
-              {repoLabel}
-            </a>
-          )}
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
-            >
-              {demoLabel}
-            </a>
-          )}
-        </span>
+      <div className="mt-auto flex items-center justify-end gap-3 pt-2 text-xs">
+        {hasLinks ? (
+          <>
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
+              >
+                {repoLabel}
+              </a>
+            )}
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
+              >
+                {demoLabel}
+              </a>
+            )}
+          </>
+        ) : (
+          <span className="text-faint-foreground">{comingSoonLabel}</span>
+        )}
       </div>
     </article>
   );
