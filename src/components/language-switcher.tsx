@@ -30,8 +30,8 @@ export function LanguageSwitcher({
             aria-current={isCurrent ? "true" : undefined}
             className={
               isCurrent
-                ? "font-semibold text-zinc-50"
-                : "text-zinc-500 hover:text-zinc-200"
+                ? "font-semibold text-foreground"
+                : "text-faint-foreground transition-colors duration-150 hover:text-muted-foreground"
             }
           >
             {labels[locale]}

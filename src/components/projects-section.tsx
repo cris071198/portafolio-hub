@@ -22,10 +22,10 @@ export function ProjectsSection({
   return (
     <section className="w-full max-w-5xl px-6 py-16">
       <div className="mb-10 max-w-2xl">
-        <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           {dict.projectsHeading}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-zinc-400">
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">
           {dict.projectsSubheading}
         </p>
       </div>

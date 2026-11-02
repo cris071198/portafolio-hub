@@ -14,6 +14,8 @@ const dictionaries = {
     sizeLabel: "Tamaño",
     repoLabel: "Código",
     demoLabel: "Demo",
+    themeToggleToLight: "Cambiar a tema claro",
+    themeToggleToDark: "Cambiar a tema oscuro",
   },
   en: {
     greeting: "Portfolio under construction",
@@ -28,6 +30,8 @@ const dictionaries = {
     sizeLabel: "Size",
     repoLabel: "Code",
     demoLabel: "Demo",
+    themeToggleToLight: "Switch to light theme",
+    themeToggleToDark: "Switch to dark theme",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

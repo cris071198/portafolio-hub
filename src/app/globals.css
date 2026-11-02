@@ -1,6 +1,42 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #18181b;
+  --muted-foreground: #52525b;
+  --faint-foreground: #71717a;
+  --border: #e4e4e7;
+  --card: #fafafa;
+  --chip: #f4f4f5;
+  --chip-foreground: #3f3f46;
+  --hover-border: #a1a1aa;
+  --hover-bg: #f4f4f5;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #fafafa;
+  --muted-foreground: #a1a1aa;
+  --faint-foreground: #71717a;
+  --border: #27272a;
+  --card: rgb(24 24 27 / 0.4);
+  --chip: rgb(39 39 42 / 0.8);
+  --chip-foreground: #d4d4d8;
+  --hover-border: #52525b;
+  --hover-bg: rgb(39 39 42 / 0.7);
+}
+
 @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faint-foreground: var(--faint-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-chip: var(--chip);
+  --color-chip-foreground: var(--chip-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
@@ -36,8 +72,7 @@
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover {
     transform: translateY(-4px);
-    border-color: var(--color-zinc-600);
-    background-color: color-mix(in srgb, var(--color-zinc-900) 70%, transparent);
+    border-color: var(--hover-border);
+    background-color: var(--hover-bg);
   }
 }
-
