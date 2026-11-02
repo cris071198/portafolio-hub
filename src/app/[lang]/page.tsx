@@ -4,6 +4,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { HeroSection } from "@/components/hero-section";
 import { ProjectsSection } from "@/components/projects-section";
+import { StackSummary } from "@/components/stack-summary";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -26,6 +27,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <HeroSection dict={dict} />
 
       <ProjectsSection lang={lang as Locale} dict={dict} />
+
+      <StackSummary lang={lang as Locale} dict={dict} />
     </div>
   );
 }

@@ -30,3 +30,9 @@ export interface ContactLink {
   label: string;
   href: string;
 }
+
+export interface StackGroup {
+  id: string;
+  label: Translated;
+  items: string[];
+}

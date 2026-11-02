@@ -13,6 +13,9 @@ const dictionaries = {
     statusPlanned: "Planeado",
     statusInProgress: "En progreso",
     statusLive: "En vivo",
+    stackHeading: "Stack",
+    stackSubheading:
+      "Las tecnologías que cubre el portafolio completo, agrupadas por área.",
     repoLabel: "Código",
     demoLabel: "Demo",
     comingSoonLabel: "Próximamente",
@@ -31,6 +34,9 @@ const dictionaries = {
     statusPlanned: "Planned",
     statusInProgress: "In progress",
     statusLive: "Live",
+    stackHeading: "Stack",
+    stackSubheading:
+      "The technologies covered across the whole portfolio, grouped by area.",
     repoLabel: "Code",
     demoLabel: "Demo",
     comingSoonLabel: "Coming soon",
