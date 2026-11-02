@@ -223,6 +223,30 @@ by locale). Never hardcode user-facing text in a component — always
 pull from the dictionary or content layer so both `/es` and `/en` stay
 in sync by construction.
 
+## SEO & metadata
+
+- `src/app/[lang]/layout.tsx` uses `generateMetadata` (not a static
+  `metadata` export) so title, description, and Open Graph/Twitter
+  tags are generated per locale from the dictionary — never hardcode
+  SEO copy separately from the dictionary strings it mirrors.
+- `alternates.canonical` + `alternates.languages` emit `hreflang` for
+  both `/es` and `/en` on every page.
+- `src/app/[lang]/opengraph-image.tsx` generates the share image at
+  request time with `next/og`'s `ImageResponse` — no external
+  image-generation tool or static asset, matches the dark/minimalist
+  brand, and is bilingual (reads the same dictionary). Uses Satori's
+  default font rather than loading Geist's font file explicitly; close
+  enough visually, revisit only if the mismatch becomes noticeable.
+- `src/app/sitemap.ts` and `src/app/robots.ts` are root-level
+  (sibling to `[lang]/`, not inside it) — Next's file convention for
+  `/sitemap.xml` and `/robots.txt`.
+- `src/lib/site.ts` exports the single `siteUrl` every one of the
+  above reads from `NEXT_PUBLIC_SITE_URL` (`.env.example` documents
+  it), falling back to `localhost:3000`. **No domain is decided yet**
+  (see `portafolio-plan/00-plan-general.md`, "Decisiones abiertas") —
+  set that env var at deploy time or every absolute URL emitted
+  (canonical, OG, sitemap entries) will point at localhost.
+
 ## Accessibility
 
 - Reduced motion respected everywhere motion is decorative (see
