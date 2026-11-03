@@ -10,7 +10,7 @@ export function StackSummary({
   dict: Dictionary;
 }) {
   return (
-    <section id="stack" className="w-full max-w-5xl scroll-mt-8 px-6 py-16">
+    <section id="stack" className="w-full max-w-5xl scroll-mt-24 px-6 py-16">
       <div className="mb-10 max-w-2xl">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           {dict.stackHeading}
