@@ -116,6 +116,33 @@ keyboard-triggered toggle.
 (`animation: none !important`), leaving content visible — motion is
 removed, not just slowed, since it's purely decorative here.
 
+### Theme toggle: sun/moon rotation
+
+The two icons stay mounted and cross-fade with a half-turn rotation
+(`rotate-180` ↔ `rotate-0`) instead of being swapped on click. Uses a
+gentler, more evenly-paced curve
+(`cubic-bezier(0.33,1,0.68,1)`, 400ms) than the site's usual
+`--ease-out-strong` — that stronger curve front-loads nearly all its
+motion in the first third of the duration, which made a 180° rotation
+read as "already finished" well before it visually was. Reserve
+`--ease-out-strong` for snappy UI feedback (hover, press); reach for a
+plainer ease-out when a transform needs to stay visible across its
+full duration.
+
+**Tailwind v4 pitfall, verified the hard way**: `rotate-*` utilities
+set the native CSS `rotate` property, not `transform`. A `transition-
+[transform,...]` class on a `rotate-*` element compiles and applies
+with zero errors, but the rotation never animates — nothing is wrong
+syntactically, so there's nothing to catch it except actually watching
+(or measuring) the transition. Confirmed by sampling
+`getComputedStyle(el).rotate` across the transition with
+`requestAnimationFrame`, not by eyeballing screenshots — screenshot
+timing is too unreliable (`click()`'s own dispatch overhead varies) to
+tell "finishes fast" apart from "never moved." Same applies to
+`scale-*` (property `scale`) and `translate-*` (property `translate`)
+— transition the matching native property, not `transform`, for any
+of them.
+
 ### Hover feedback
 
 Cards lift (`translateY(-4px)`) and their border/background lighten
@@ -134,6 +161,17 @@ chaining `[@media(...)]:hover:` utilities.
   the card's single entrance, not a separate moment).
 
 ## Component patterns
+
+### Site nav (`SiteNav`)
+
+A full-width `sticky top-0` `<header>` with `bg-background/70
+backdrop-blur-md` and a `border-b border-border/60`, wrapping an inner
+`<nav>` constrained to `max-w-5xl` and centered — the blur/translucency
+has to span the full viewport width even though the nav content
+doesn't, so the glass effect is on the outer element, not the inner
+one. Section anchors (`#projects`, `#stack`) use `scroll-mt-24` (not
+the `scroll-mt-8` used before the nav went sticky) so a jump-link
+doesn't land with its heading hidden under the bar.
 
 ### Card (`ProjectCard`)
 
